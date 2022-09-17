@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_16_140821) do
+ActiveRecord::Schema.define(version: 2022_09_17_042734) do
+
+  create_table "cart_baskets", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_cart_baskets_on_product_id", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "cart_basket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_basket_id"], name: "index_orders_on_cart_basket_id", unique: true
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
